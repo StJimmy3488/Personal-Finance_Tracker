@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet"  th:href="@{/styles/users.css}" />
+</head>
+<body>
+<h1>User List</h1>
+<div class="user" th:each="user: ${users}">
+    <img class="user-photo" th:src="${user.photoUrl}">
+    <a th:text="${user.userName}"></a>
+    <a th:text="${user.userSurname}"></a>
+</div>
+</body>
+</html>
