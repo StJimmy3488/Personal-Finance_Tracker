@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" th:href="@{/styles/users-create.css}"/>
+</head>
+<body>
+<h3>Edit User</h3>
+<form class="row" method="post" th:action="@{/users/{userId}/edit(userId=${user.id})}" th:object="${user}">
+    <input type="hidden" th:field="*{id}">
+    <div>
+        <!--        <label class="form-label">Name</label>-->
+        <input type="text"
+               name="name"
+               class="form-control"
+               th:field="*{userName}"
+               placeholder="First name"
+        >
+    </div>
+    <div class="col-12">
+        <!--        <label class="form-label">Surname</label>-->
+        <input type="text"
+               name="surname"
+               th:field="*{userSurname}"
+               class="form-control"
+               placeholder="Surname"
+        >
+    </div>
+    <div>
+        <!--        <label class="form-label">Photo URL</label>-->
+        <input type="url"
+               th:field="*{photoUrl}"
+               class="form-control"
+               placeholder="Photo Url"
+        >
+    </div>
+    <div>
+        <button type="update" class="btn btn-primary">Update</button>
+    </div>
+</form>
+</body>
+</html>

@@ -2,8 +2,6 @@ package com.example.PersonalFinanceTracker.DTO;
 
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +9,10 @@ import java.time.LocalDateTime;
 @Builder
 public class UserDTO {
 
-    private int id;
+    private long id;
     private String login;
     private String userName;
+    private String password;
     private String userSurname;
     private String photoUrl;
     private LocalDateTime createdOn;

@@ -5,8 +5,6 @@ import com.example.PersonalFinanceTracker.Model.User;
 import com.example.PersonalFinanceTracker.Repository.UserRepository;
 import com.example.PersonalFinanceTracker.Service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +19,35 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.findAll();
         return users.stream().map(this::mapToUserDTO).collect(Collectors.toList());
     }
+
+    @Override
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserDTO findById(long userId) {
+        User user = userRepository.findById(userId).get();
+        return mapToUserDTO(user);
+    }
+
+    @Override
+    public void updateUser(UserDTO userDTO) {
+        User user = mapToUser(userDTO);
+        userRepository.save(user);
+    }
+
+    private User mapToUser(UserDTO user) {
+        return User.builder()
+                .id(user.getId())
+                .userName(user.getUserName())
+                .userSurname(user.getUserSurname())
+                .photoUrl(user.getPhotoUrl())
+                .build();
+    }
+
     private UserDTO mapToUserDTO(User user) {
-        UserDTO userDTO = UserDTO.builder()
+        return UserDTO.builder()
                 .id(user.getId())
                 .userName(user.getUserName())
                 .userSurname(user.getUserSurname())
@@ -30,6 +55,5 @@ public class UserServiceImpl implements UserService {
                 .createdOn(user.getCreatedOn())
                 .updatedOn(user.getUpdatedOn())
                 .build();
-        return userDTO;
     }
 }
