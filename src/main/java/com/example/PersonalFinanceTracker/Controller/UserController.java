@@ -3,9 +3,11 @@ package com.example.PersonalFinanceTracker.Controller;
 import com.example.PersonalFinanceTracker.DTO.UserDTO;
 import com.example.PersonalFinanceTracker.Model.User;
 import com.example.PersonalFinanceTracker.Service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +42,12 @@ public class UserController {
     }
 
     @PostMapping("users/new")
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+    public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("user", userDTO);
+            return "users-create";
+        }
+        userService.saveUser(userDTO);
         return "redirect:/users";
     }
 
@@ -53,7 +59,12 @@ public class UserController {
     }
 
     @PostMapping("/users/{userId}/edit")
-    public String updateUser(@PathVariable("userId") long userId, @ModelAttribute("user") UserDTO user) {
+    public String updateUser(@PathVariable("userId") long userId,
+                             @Valid @ModelAttribute("user") UserDTO user,
+                             BindingResult result) {
+        if (result.hasErrors()) {
+            return "users-edit";
+        }
         user.setId(userId);
         userService.updateUser(user);
         return "redirect:/users";

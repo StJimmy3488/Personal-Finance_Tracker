@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New User</title>
-    <link rel="stylesheet" th:href="@{/styles/users-create.css}" />
+    <link rel="stylesheet" th:href="@{/styles/users-create.css}"/>
 </head>
 <body>
 <h3>Create New User</h3>
@@ -16,6 +16,7 @@
                 th:field="*{login}"
                 placeholder="Email"
         >
+        <p th:if="${#fields.hasErrors('login')}" class="text-danger" th:errors="*{login}"></p>
     </div>
     <div>
         <input
@@ -25,32 +26,37 @@
                 th:field="*{password}"
                 placeholder="Password"
         >
+        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+
     </div>
     <div>
-<!--        <label class="form-label">Name</label>-->
+        <!--        <label class="form-label">Name</label>-->
         <input type="text"
                name="name"
                class="form-control"
                th:field="*{userName}"
                placeholder="First name"
         >
+        <p th:if="${#fields.hasErrors('userName')}" class="text-danger" th:errors="*{userName}"></p>
     </div>
     <div class="col-12">
-<!--        <label class="form-label">Surname</label>-->
+        <!--        <label class="form-label">Surname</label>-->
         <input type="text"
                name="surname"
                th:field="*{userSurname}"
                class="form-control"
                placeholder="Surname"
         >
+        <p th:if="${#fields.hasErrors('userSurname')}" class="text-danger" th:errors="*{userSurname}"></p>
     </div>
     <div>
-<!--        <label class="form-label">Photo URL</label>-->
+        <!--        <label class="form-label">Photo URL</label>-->
         <input type="url"
                th:field="*{photoUrl}"
                class="form-control"
                placeholder="Photo Url"
         >
+        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
     </div>
     <div>
         <button type="create" class="btn btn-primary">Create</button>

@@ -49,6 +49,11 @@ input {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.text-danger {
+    margin-bottom: auto;
+    align-items: center;
+}
+
 /* Style for primary button */
 .btn-primary {
     color: #fff;

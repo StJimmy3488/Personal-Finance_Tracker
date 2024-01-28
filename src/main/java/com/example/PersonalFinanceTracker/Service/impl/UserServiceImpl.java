@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(UserDTO userDTO) {
+        User user = mapToUser(userDTO);
         return userRepository.save(user);
     }
 
@@ -40,8 +41,10 @@ public class UserServiceImpl implements UserService {
     private User mapToUser(UserDTO user) {
         return User.builder()
                 .id(user.getId())
+                .login(user.getLogin())
                 .userName(user.getUserName())
                 .userSurname(user.getUserSurname())
+                .password(user.getPassword())
                 .photoUrl(user.getPhotoUrl())
                 .build();
     }
@@ -49,7 +52,9 @@ public class UserServiceImpl implements UserService {
     private UserDTO mapToUserDTO(User user) {
         return UserDTO.builder()
                 .id(user.getId())
+                .login(user.getLogin())
                 .userName(user.getUserName())
+                .password(user.getPassword())
                 .userSurname(user.getUserSurname())
                 .photoUrl(user.getPhotoUrl())
                 .createdOn(user.getCreatedOn())

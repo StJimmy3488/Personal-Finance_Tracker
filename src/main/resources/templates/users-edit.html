@@ -10,6 +10,16 @@
 <form class="row" method="post" th:action="@{/users/{userId}/edit(userId=${user.id})}" th:object="${user}">
     <input type="hidden" th:field="*{id}">
     <div>
+        <input
+                type="email"
+                class="form-control"
+                name="email"
+                th:field="*{login}"
+                placeholder="Email"
+        >
+        <p th:if="${#fields.hasErrors('login')}" class="text-danger" th:errors="*{login}"></p>
+    </div>
+    <div>
         <!--        <label class="form-label">Name</label>-->
         <input type="text"
                name="name"
@@ -17,6 +27,7 @@
                th:field="*{userName}"
                placeholder="First name"
         >
+        <p th:if="${#fields.hasErrors('userName')}" class="text-danger" th:errors="*{userName}"></p>
     </div>
     <div class="col-12">
         <!--        <label class="form-label">Surname</label>-->
@@ -26,6 +37,7 @@
                class="form-control"
                placeholder="Surname"
         >
+        <p th:if="${#fields.hasErrors('userSurname')}" class="text-danger" th:errors="*{userSurname}"></p>
     </div>
     <div>
         <!--        <label class="form-label">Photo URL</label>-->
@@ -34,6 +46,18 @@
                class="form-control"
                placeholder="Photo Url"
         >
+        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+    </div>
+    <div>
+        <input
+                type="password"
+                class="form-control"
+                name="password"
+                th:field="*{password}"
+                placeholder="Password"
+        >
+        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+
     </div>
     <div>
         <button type="update" class="btn btn-primary">Update</button>

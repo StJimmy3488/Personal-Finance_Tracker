@@ -9,12 +9,28 @@
 </head>
 <body>
 <h1>User List</h1>
-<a th:href="@{/users/new}">Add New User</a>
+<a th:href="@{/users/new}" class="create-user">
+    <img src="https://cdn-icons-png.flaticon.com/512/153/153643.png" alt="My pic">
+</a>
 
-<div class="user" th:each="user: ${users}">
-    <img class="user-photo" th:src="${user.photoUrl}">
-    <a th:href="@{/users/{userId}/edit(userId=${user.id})}" th:text="|${user.userName}  ${user.userSurname}|"></a>
-
+<div class="list-wrapper" th:each="user: ${users}">
+    <ul class="list">
+        <li class="list-item">
+<!--    <a class="edit-user" th:href="@{/users/{userId}/edit(userId=${user.id})}">-->
+        <div>
+            <a th:href="@{/users/{userId}/edit(userId=${user.id})}">
+            <img th:src="${user.photoUrl}" class="list-item-image" >
+            </a>
+        </div>
+        <div class="list-item-content">
+            <a th:href="@{/users/{userId}/edit(userId=${user.id})}">
+                <h4 th:text="|${user.userName}  ${user.userSurname}|"></h4>
+                <p th:text="${user.login}"></p>
+            </a>
+        </div>
+<!--    </a>-->
+        </li>
+    </ul>
 </div>
 </body>
 </html>
